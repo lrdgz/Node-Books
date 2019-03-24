@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const { title, author, isbn } = req.body;
-    const book = await new Book({ title, author, isbn });
+    const imagePath = '/uploads/' + req.file.filename;
+    const book = await new Book({ title, author, isbn, imagePath });
     book.save();
     res.json({
         message: 'Created',
