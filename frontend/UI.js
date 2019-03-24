@@ -50,7 +50,13 @@ class UI {
     }
 
     renderMessage() { }
-    deleteBook() { }
+
+
+    async deleteBook(book) {
+        await bookService.deleteBooks(book).then(res => {
+            this.renderBooks();
+        });
+    }
 }
 
 

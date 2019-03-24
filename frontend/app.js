@@ -1,6 +1,7 @@
 // require('./styles/style.css');
 import './styles/app.css';
 import UI from './UI';
+import { DocumentQuery } from 'mongoose';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('LOADED DOM');
@@ -24,5 +25,13 @@ document.getElementById('book-form').addEventListener('submit', e => {
     const ui = new UI();
     ui.addANewBook(data);
 
+});
 
+document.getElementById('books-cards').addEventListener('click', e => {
+    e.preventDefault();
+    if (e.target.classList.contains('delete')) {
+        const id = e.target.getAttribute('_id');
+        const ui = new UI();
+        ui.deleteBook(id);
+    }
 });
