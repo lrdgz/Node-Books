@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (process.env.NODE_ENV == 'development') {
+    require('dotenv').config();
+}
 
 //REQUIRED MODULES
 const express = require('express');
@@ -22,12 +24,13 @@ const storage = multer.diskStorage({
 
 //Middlewares
 app.use(morgan('dev'));
+
 app.use(multer({ storage }).single('image'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Routes
-app.use('api/books', require('./routes/books'));
+app.use('/api/books', require('./routes/books'));
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,3 +39,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
 });
+
+// b3lens
